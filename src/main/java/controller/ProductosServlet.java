@@ -1,10 +1,10 @@
 package controller;
 /*
 Descripción: Esta clase se encarga de mostrar los productos disponibles en formato HTML.
-Si el usuario está autenticado, también muestra los precios de los productos.
-Si no está autenticado, oculta los precios.
+Si el usuario está autenticado, también muestra los precios de los productos y un botón de compra.
+Si no está autenticado, oculta los precios y el botón de compra.
 Autor: Dilan Salazar
-Fecha: 2025/11/11
+Fecha: 2025/12/11
 */
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -73,9 +73,10 @@ public class ProductosServlet extends HttpServlet {
             out.println("<th>ID</th>");
             out.println("<th>Nombre</th>");
             out.println("<th>Tipo</th>");
-            // Solo muestra el precio si el usuario está autenticado
+            // Solo muestra el precio y el botón de compra si el usuario está autenticado
             if (usernameOptional.isPresent()) {
                 out.println("<th>Precio</th>");
+                out.println("<th>Acciones</th>");
             }
             out.println("</tr>");
 
@@ -85,8 +86,15 @@ public class ProductosServlet extends HttpServlet {
                 out.println("<td>" + producto.getId() + "</td>");
                 out.println("<td>" + producto.getNombre() + "</td>");
                 out.println("<td>" + producto.getTipo() + "</td>");
+                // Si el usuario está autenticado, muestra el precio y el botón de compra para anadir al carrito
                 if (usernameOptional.isPresent()) {
                     out.println("<td>$" + producto.getPrecio() + "</td>");
+                    out.println("<td><a href=\""+ req.getContextPath()
+                            //--Error 500 del Servidor--
+                            //al anadir "/agregar-carro?id=?" se lanza una expecipon numerica por que la URL
+                            //no busca los parametros sino que usa el servlet para buscar la cabecera HTTP con el valor de "id"
+                            + "/agregar-carro?id="
+                            + producto.getId() + "\">Comprar</a></td>");
                 }
                 out.println("</tr>");
             });

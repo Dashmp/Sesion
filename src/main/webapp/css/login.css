@@ -1,0 +1,80 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #111;
+    margin: 0;
+    padding: 0;
+}
+
+/* Título */
+h1 {
+    text-align: center;
+    color: #0a3d62;
+    margin-top: 40px;
+}
+
+/* Contenedor del formulario */
+.container {
+    background-color: white;
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Campos del formulario */
+.campo {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #0a3d62;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+/* Botones */
+.btn {
+    background-color: #0a3d62;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    width: 100%;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background-color: #1e90ff;
+}
+
+/* Botón de volver */
+.volver {
+    background-color: #444;
+    margin-top: 10px;
+}
+
+.volver:hover {
+    background-color: #666;
+}
+
+/* Mensajes de error */
+.error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.9em;
+}

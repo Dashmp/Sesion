@@ -1,0 +1,50 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #111;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Título */
+h3 {
+    color: #0a3d62;
+    margin-top: 40px;
+    font-size: 28px;
+}
+
+/* Lista */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 40px;
+}
+
+li {
+    margin: 15px 0;
+}
+
+/* Botones */
+.btn {
+    background-color: #0a3d62;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #1e90ff;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 600px) {
+    .btn {
+        width: 80%;
+    }
+}

@@ -38,7 +38,7 @@ public class AgregarCarroServlet extends HttpServlet {
         Si la cabecera no existe o no es una fecha válida, devuelve -1.
         el String.valueOf convierte el valor 'long' en string par que no exista error 500
          */
-        Long id = Long.parseLong(String.valueOf(req.getDateHeader("id")));
+        Long id = Long.parseLong(req.getParameter("id"));
 
         // Busca el producto por su ID
         Optional<Producto> producto = service.porid(id);

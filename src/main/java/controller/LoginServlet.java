@@ -34,7 +34,8 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
         Boolean visitado = (Boolean) session.getAttribute("visitado");
 
-        // Incrementa el contador solo la primera vez que el usuario entra en la sesión para que el metodo doGet no lo incremente cada vez que recarga la página
+        // Incrementa el contador solo la primera vez que el usuario entra en
+        // la sesión para que el metodo doGet no lo incremente cada vez que recarga la página
         if (visitado == null || !visitado) {
             contadorVisitas++;
             session.setAttribute("visitado", true);
@@ -56,13 +57,13 @@ public class LoginServlet extends HttpServlet {
                 out.println("<title>Hola " + usernameOptional.get() + "</title>");
                 // Estilos CSS
                 out.println("<style>");
-                out.println("body {font-family: Arial, sans-serif; background-color: #f4f4f4; color: #111; margin: 0; padding: 0;}");
-                out.println(".container {max-width: 600px; margin: 80px auto; background-color: #fff; padding: 40px; border-radius: 10px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.2);}");
-                out.println("h1 {color: #0a3d62; margin-bottom: 15px;}");
-                out.println("p {color: #333; font-size: 16px;}");
-                out.println(".btn {display: inline-block; background-color: #0a3d62; color: white; border: none; padding: 10px 20px; margin: 15px 10px; cursor: pointer; border-radius: 8px; transition: 0.3s;}");
-                out.println(".btn:hover {background-color: #1e90ff;}");
+                out.println("body {font-family: Arial; background:#f4f4f4; margin:0; padding:0;}");
+                out.println(".container {max-width:600px; margin:80px auto; background:white; padding:40px; border-radius:10px; text-align:center; box-shadow:0 0 10px rgba(0,0,0,0.2);}");
+                out.println("h1 {color:#0a3d62;}");
+                out.println(".btn {background:#0a3d62; color:white; padding:10px 20px; border-radius:8px; border:none; cursor:pointer;}");
+                out.println(".btn:hover {background:#1e90ff;}");
                 out.println("</style>");
+
                 // Script JS para confirmar cierre de sesión
                 out.println("<script>");
                 out.println("function confirmarCerrarSesion() {");

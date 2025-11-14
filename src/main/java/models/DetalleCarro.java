@@ -1,43 +1,69 @@
 package models;
+
 /*
-Descripción: Esta clase representa el carrito de compras,
-gestionando la adición de productos y el cálculo del total.
+Descripción:
+  Esta clase representa el carrito de compras.
+  Permite agregar ítems, calcular el total, el IVA y el total final.
+  Evita duplicados sumando la cantidad cuando se agrega un mismo producto.
+
 Autor: Dilan Salazar
-Fecha: 2025/12/11
+Fecha: 2025/13/11
 */
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class DetalleCarro {
-    // Lista que contiene los ítems que forman parte del carrito de compras
+
+    // Lista que contiene todos los ítems que forman parte del carrito
     private List<ItemCarro> items;
 
-    // Constructor que inicializa la lista de ítems vacía
-    public DetalleCarro (){this.items=new ArrayList<>();}
-
-    // Método que agrega un ítem al carrito
-    public void addItemCarro(ItemCarro itemCarro) {
-        // Si el ítem ya existe en el carrito, se busca para incrementar su cantidad
-        if(items.contains(itemCarro)){
-            Optional<ItemCarro> optionalItemCarro= items.stream()
-                    .filter(i -> i.equals(itemCarro))
-                    .findAny();
-            if(optionalItemCarro.isPresent()){
-                ItemCarro i = optionalItemCarro.get();
-                // Aumenta la cantidad del ítem existente de uno en uno
-                //para que no se repita la impresion del producto
-                i.setCantidad(i.getCantidad()+1);
-            }
-        }else {
-            // Si no existe, se agrega como un nuevo ítem al carrito
-            this.items.add(itemCarro);
-        }
+    // Constructor: inicializa la lista vacía
+    public DetalleCarro() {
+        this.items = new ArrayList<>();
     }
 
-    // Retorna la lista completa de ítems del carrito
-    public List<ItemCarro> getItems() { return items; }
+    /*
+     Agrega un ítem al carrito.
+     Si el producto ya existe, simplemente incrementa la cantidad,
+     si no existe, lo agrega como un nuevo ítem para
+     evitar crear filas duplicadas e innecesarias.
+     */
+    public void addItemCarro(ItemCarro itemCarro) {
 
-    // Calcula el total del carrito sumando los subtotales de cada ítem
-    public double getTotal(){return items.stream().mapToDouble(ItemCarro::getSubtotal).sum();}
+        for (ItemCarro itemExistente : items) {
+            // Si el producto ya está en el carrito solo se actualiza la cantidad
+            if (itemExistente.getProducto().getId().equals(itemCarro.getProducto().getId())) {
+                // Sumar cantidades para evitar filas innecesarias
+                itemExistente.setCantidad(
+                        itemExistente.getCantidad() + itemCarro.getCantidad()
+                );
+                return;
+            }
+        }
+        // Si el producto no estaba, se agrega como nuevo ítem
+        items.add(itemCarro);
+    }
+
+    // Devuelve la lista completa de ítems
+    public List<ItemCarro> getItem() {
+        return items;
+    }
+
+    // Calcula el precio total de la compra (sin IVA)
+    public double getTotal() {
+        return items.stream()
+                .mapToDouble(ItemCarro::getSubtotal)
+                .sum();
+    }
+
+    // Agrega el IVA (15% del total)
+    public double getIva() {
+        return getTotal() * 0.15;
+    }
+
+    // Total con IVA incluido en la compra total, no por producto
+    public double getTotalConIva() {
+        return getTotal() + getIva();
+    }
 }
